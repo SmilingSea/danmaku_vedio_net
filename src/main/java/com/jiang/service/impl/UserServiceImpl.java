@@ -35,4 +35,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
        data.put("id", user.getId());
         return Result.success(data,"注册成功！");
     }
+
+    @Override
+    public Result<String> login(String name, String password) {
+        return null;
+    }
 }

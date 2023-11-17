@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
 public interface UserService extends IService<UserDO> {
-
     /**
      * 用户注册
      *
@@ -17,4 +16,8 @@ public interface UserService extends IService<UserDO> {
      * @return
      */
     public Result<HashMap<String, Object>> save(HttpServletRequest request, UserDO user);
+
+    public Result<String> login(String name,String password);
+
+
 }
