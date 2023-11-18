@@ -25,6 +25,8 @@ public class UserController {
         return userService.save(request, user);
     }
 
-//    @PostMapping("/login")
-//    public Result<UserDO>
+    @PostMapping("/login")
+    public Result<String> login(@RequestBody UserDO user){
+        return userService.login(user);
+    }
 }

@@ -37,10 +37,12 @@ public class Result<T> {
         return r;
     }
 
+
+
     public static <T> Result<T> error(String msg) {
         Result r = new Result();
         r.msg = msg;
-        r.code = 0;
+        r.code = 400;
         return r;
     }
 

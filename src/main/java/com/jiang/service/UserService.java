@@ -17,7 +17,7 @@ public interface UserService extends IService<UserDO> {
      */
     public Result<HashMap<String, Object>> save(HttpServletRequest request, UserDO user);
 
-    public Result<String> login(String name,String password);
+    public Result<String> login(UserDO user);
 
 
 }
