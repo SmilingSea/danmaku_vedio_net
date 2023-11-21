@@ -20,7 +20,6 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-//    @Api
     public Result<HashMap<String,Object>> save(HttpServletRequest request, @RequestBody UserDO user){
         return userService.save(request, user);
     }
@@ -28,5 +27,10 @@ public class UserController {
     @PostMapping("/login")
     public Result<String> login(@RequestBody UserDO user){
         return userService.login(user);
+    }
+
+    @GetMapping("/{token}")
+    public Result<UserDO> getById(@PathVariable String token){
+        return  userService.getById(token);
     }
 }

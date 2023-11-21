@@ -1,7 +1,9 @@
 package com.jiang.domain;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
+@Data
 @TableName("tb_socializing")
 public class SocializingDO {
     /**

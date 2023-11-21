@@ -19,5 +19,10 @@ public interface UserService extends IService<UserDO> {
 
     public Result<String> login(UserDO user);
 
+    public Result<UserDO> getById(String token);
+
+    //TODO:用户的身份认证，安全框架
+    //TODO:头像功能
+
 
 }

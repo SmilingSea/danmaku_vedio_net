@@ -39,21 +39,5 @@ public class TokenTest {
         System.out.println(builder.compact());
     }
 
-    /**
-     * 获取token中的参数
-     */
-    @Test
-    public void  parseToken() {
-        String   token = "eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEyMzQ1Nn0.SBAl28XE4bVEhHKTT4QkZHsqQBpkEnSw-Y8DiPUSX4U";
-        DecodedJWT jwt = null;
-        try {
-            jwt = JWT.decode(token);
-            System.out.println(jwt.getClaim("uid").asLong());
-//            return jwt;
-        } catch (JWTDecodeException exception) {
-            //Invalid token
 
-        }
-
-    }
 }

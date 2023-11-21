@@ -6,7 +6,7 @@ import com.jiang.common.Result;
 import com.jiang.domain.UserDO;
 import com.jiang.mapper.UserMapper;
 import com.jiang.service.UserService;
-import com.jiang.util.TokenCreater;
+import com.jiang.util.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +25,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 
     @Override
     public Result<HashMap<String, Object>> save(HttpServletRequest request, UserDO user) {
+        // TODO:判断是否账号密码重复
         log.info("新增员工，员工信息为：{}"+user.toString());
         //设置使用md5进行加密密码
         user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
@@ -60,6 +61,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         }
 
         //登录成功，返回token
-        return Result.success(TokenCreater.getToken(usr),"登录成功！");
+        return Result.success(JwtUtils.getToken(usr),"登录成功！");
     }
+
+    @Override
+    public Result<UserDO> getById(String token) {
+        Long id = JwtUtils.getIdByToken(token);
+        log.info("用户id为：{}",id);
+        UserDO usr = userService.getById(id);
+        if (usr != null){
+            return Result.success(usr,"查询成功！");
+        }
+        return Result.error("没有查到用户信息");
+    }
+
+
 }
