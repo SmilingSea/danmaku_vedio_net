@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -27,9 +28,18 @@ public class SocializingController {
         return socializingService.delete(token,usr);
     }
 
-    @GetMapping("/{token}")
-    public Result<HashMap<String, Object>> getFollows(@PathVariable String token){
+    @GetMapping("/follow")
+    public Result<List<Long>> getFollows(@RequestHeader String token){
         return socializingService.getFollows(token);
     }
 
+    @GetMapping("/fans")
+    public Result<List<Long>> getFans(@RequestHeader String token){
+        return socializingService.getFans(token);
+    }
+
+    @GetMapping("/friends")
+    public Result<List<Long>> getFriends(@RequestHeader String token){
+        return socializingService.getFriends(token);
+    }
 }
