@@ -45,7 +45,26 @@ public class UserDO {
     /**
      * 用户身份（是否为管理员）
      */
-    private int identity;
+    private String identity;
+
+    /**
+     * 用户头像url
+     */
+    private String avatar;
 
 
+    public UserDO(Long id, String name, String password, String phone, String email, String profile, int blocked, String identity, String avatar) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.phone = phone;
+        this.email = email;
+        this.profile = profile;
+        this.blocked = blocked;
+        this.identity = identity;
+        this.avatar = avatar;
+    }
+
+    public UserDO() {
+    }
 }

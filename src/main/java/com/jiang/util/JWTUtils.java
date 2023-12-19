@@ -13,7 +13,9 @@ import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;
 
-public class JwtUtils {
+public class JWTUtils {
+
+
 
     private static final String SECRET = "nihao";
 
@@ -34,6 +36,9 @@ public class JwtUtils {
                 .claim("uid",user.getId()) // 设置载荷信息
                 .signWith(signatureAlgorithm, signingKey)
                 .setExpiration(expireDate);
+
+
+
 
         //生成JWT
         return builder.compact();
@@ -57,4 +62,9 @@ public class JwtUtils {
         }
         return uid;
     }
+
+
+    /**
+     * 验证token是否合法
+     */
 }

@@ -30,10 +30,10 @@ public class VideoDO {
     /**
      *视频类型
      */
-//    private Enum<> type;
+    private String type;
 
     /**
-     *视频点击量
+     * 用户id
      */
-    private int clicknum;
+    private Long usrid;
 }

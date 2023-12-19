@@ -1,6 +1,10 @@
 server:
-  port: 8080
+  port: 8081
 spring:
+  servlet:
+    multipart:
+      max-file-size: 1GB
+      max-request-size: 1GB
   application:
 #    应用的名称，可选
     name: danmaku_vedio_network
@@ -15,6 +19,7 @@ spring:
     port: 6379
     password: jhh72811
     database: 0
+
 mybatis-plus:
   configuration:
     #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
@@ -23,6 +28,8 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: ASSIGN_ID
+
+
 
 
 

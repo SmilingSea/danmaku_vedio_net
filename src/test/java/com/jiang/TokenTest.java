@@ -1,8 +1,5 @@
 package com.jiang;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.exceptions.JWTDecodeException;
-import com.auth0.jwt.interfaces.DecodedJWT;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -11,9 +8,6 @@ import org.junit.jupiter.api.Test;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class TokenTest {
 
@@ -38,6 +32,8 @@ public class TokenTest {
         //生成JWT
         System.out.println(builder.compact());
     }
+
+
 
 
 }
