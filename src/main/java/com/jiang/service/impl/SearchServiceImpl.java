@@ -33,6 +33,12 @@ public class SearchServiceImpl implements SearchService {
     private StringRedisTemplate redisTemplate;
 
 
+    /**
+     * 搜索视频
+     * @param token
+     * @param key
+     * @return
+     */
     @Override
     public Result<HashMap<String, Object>> searchVideo(String token,String key) {
 
@@ -59,9 +65,14 @@ public class SearchServiceImpl implements SearchService {
         return Result.success(data, "查找成功");
     }
 
+    /**
+     * 搜索用户
+     * @param token
+     * @param key
+     * @return
+     */
     @Override
     public Result<HashMap<String, Object>> searchUser(String token,String key) {
-        // TODO: 隐藏密码等隐私数据
 
         //构造条件构造器
         LambdaQueryWrapper<UserDO> queryWrapper = new LambdaQueryWrapper<>();
@@ -84,6 +95,11 @@ public class SearchServiceImpl implements SearchService {
         return Result.success(data,"查找成功！");
     }
 
+    /**
+     * 获取该用户的搜索列表
+     * @param token
+     * @return
+     */
     @Override
     public Result<HashMap<String, Object>> getSearchList(String token) {
         List<String> list = new ArrayList<>();

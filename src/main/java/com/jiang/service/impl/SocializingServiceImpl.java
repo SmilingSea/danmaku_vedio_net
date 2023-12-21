@@ -47,7 +47,7 @@ public class SocializingServiceImpl extends ServiceImpl<SocializingMapper, Socia
         } else if (isRedisTokenExist(token)) {
             Long uid = JWTUtils.getIdByToken(token);
 
-            // TODO:先判断Socail表中是否存在该条数据
+
             LambdaQueryWrapper<SocializingDO> queryWrapper1 = new LambdaQueryWrapper<>();
             queryWrapper1.eq(SocializingDO::getId,uid);
             queryWrapper1.eq(SocializingDO::getFollowId,user.getId());
@@ -80,6 +80,12 @@ public class SocializingServiceImpl extends ServiceImpl<SocializingMapper, Socia
         }
     }
 
+    /**
+     * 取关
+     * @param token
+     * @param user
+     * @return
+     */
     @Override
     public Result<HashMap<String, Object>> delete(String token, UserDO user) {
         if (token.isEmpty()) {
@@ -105,6 +111,11 @@ public class SocializingServiceImpl extends ServiceImpl<SocializingMapper, Socia
         }
     }
 
+    /**
+     * 查看关注列表
+     * @param token
+     * @return
+     */
     @Override
     public Result<List<Long>> getFollows(String token) {
         if (token.isEmpty()) {
@@ -124,6 +135,11 @@ public class SocializingServiceImpl extends ServiceImpl<SocializingMapper, Socia
         }
     }
 
+    /**
+     * 查看粉丝列表
+     * @param token
+     * @return
+     */
     @Override
     public Result<List<Long>> getFans(String token) {
         if (token.isEmpty()) {
@@ -143,6 +159,11 @@ public class SocializingServiceImpl extends ServiceImpl<SocializingMapper, Socia
         }
     }
 
+    /**
+     * 查看朋友列表
+     * @param token
+     * @return
+     */
     @Override
     public Result<List<Long>> getFriends(String token) {
         if (token.isEmpty()) {

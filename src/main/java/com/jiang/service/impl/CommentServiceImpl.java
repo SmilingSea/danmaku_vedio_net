@@ -25,6 +25,13 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, CommentDO> im
     public boolean isRedisTokenExist(String token) {
         return redisTemplate.hasKey(JWTUtils.getIdByToken(token));
     }
+
+    /**
+     * 发表评论
+     * @param token
+     * @param comment
+     * @return
+     */
     @Override
     public Result<HashMap<String, Object>> save(String token, CommentDO comment) {
         if (token.isEmpty()) {
