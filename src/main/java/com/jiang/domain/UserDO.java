@@ -3,7 +3,12 @@ package com.jiang.domain;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-
+/**
+ * UserDO类用来表示该用户的基本信息
+ *
+ * @author SmilingSea
+ * @date 2023/12/21
+ */
 @Data
 @TableName("tb_user")
 public class UserDO {

@@ -38,18 +38,21 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, VideoDO> implemen
     }
 
 
+    /**
+     * 上传视频
+     * @param token
+     * @param multipartFile
+     * @param title
+     * @param type
+     * @return
+     * @throws IOException
+     */
     @Override
     public Result<HashMap<String, Object>> save(String token, MultipartFile multipartFile, String title, String type) throws IOException {
         if (token.isEmpty()) {
             return Result.error("未接收到token");
         } else if (isRedisTokenExist(token)) {
             Long usrid = JWTUtils.getIdByToken(token);
-
-            // 获取文件名
-//      String fileName = multipartFile.getOriginalFilename();
-        // 获取文件后缀
-//      String prefix = fileName.substring(fileName.lastIndexOf("."));
-        // 若需要防止生成的临时文件重复,可以在文件名后添加随机码
 
         File file = File.createTempFile(String.valueOf(IdWorker.getId()), "mp4");
         multipartFile.transferTo(file);
@@ -77,7 +80,11 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, VideoDO> implemen
     }
 
 
-    // TODO:使用redis事务
+    /**
+     * 点击视频
+     * @param videoDO
+     * @return
+     */
     @Override
     public Result<HashMap<String, Object>> click(VideoDO videoDO) {
         HashMap<String, Object> data = new HashMap<>();
@@ -111,6 +118,10 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, VideoDO> implemen
         return Result.success(data,"点击量+1");
     }
 
+    /**
+     * 获取点击量排行榜
+     * @return
+     */
     @Override
     public Result<HashMap<String, Object>> getRank() {
         ZSetOperations zSetOperations = redisTemplate.opsForZSet();

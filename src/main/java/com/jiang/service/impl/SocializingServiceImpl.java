@@ -34,6 +34,12 @@ public class SocializingServiceImpl extends ServiceImpl<SocializingMapper, Socia
     }
 
 
+    /**
+     * 关注
+     * @param token
+     * @param user
+     * @return
+     */
     @Override
     public Result<HashMap<String, Object>> save(String token, UserDO user) {
         if (token.isEmpty()) {
@@ -42,6 +48,12 @@ public class SocializingServiceImpl extends ServiceImpl<SocializingMapper, Socia
             Long uid = JWTUtils.getIdByToken(token);
 
             // TODO:先判断Socail表中是否存在该条数据
+            LambdaQueryWrapper<SocializingDO> queryWrapper1 = new LambdaQueryWrapper<>();
+            queryWrapper1.eq(SocializingDO::getId,uid);
+            queryWrapper1.eq(SocializingDO::getFollowId,user.getId());
+            if (socializingService.getOne(queryWrapper1)!= null){
+                return Result.error("已关注此用户");
+            }
 
             // 根据用户id查找该用户是否存在
             LambdaQueryWrapper<UserDO> queryWrapper = new LambdaQueryWrapper<>();

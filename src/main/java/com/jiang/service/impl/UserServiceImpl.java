@@ -33,13 +33,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
     private RedisTemplate redisTemplate;
 
 
+    /**
+     * 用户注册
+     * @param request
+     * @param user
+     * @return
+     */
     @Override
     public Result<HashMap<String, Object>> save(HttpServletRequest request, UserDO user) {
 
-        // TODO:判断是否账号密码重复
         //设置使用md5进行加密密码
         user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
 
+        //检查用户名是否重复
+        LambdaQueryWrapper<UserDO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(UserDO::getName, user.getName());
+        if(userService.getOne(queryWrapper)!= null){
+            return Result.error("该用户已存在...");
+        }
 
         userService.save(user);
         HashMap<String, Object> data = new HashMap<>();
@@ -47,14 +58,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         return Result.success(data, "注册成功！");
     }
 
+    /**
+     * 用户登录
+     * @param name
+     * @param password
+     * @return
+     */
     @Override
     public Result<String> login(/*UserDO user*/ String name,String password) {
-
-        //UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(user.getName(), user.getPassword());
-       // Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
-
-        //将提交的密码password进行MD5加密处理
-//        String password = user.getPassword();
         password = DigestUtils.md5DigestAsHex(password.getBytes());
 
         //根据用户名name查询数据库
@@ -81,6 +92,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         return Result.success(token, "登录成功！");
     }
 
+    /**
+     * 根据用户的token转换成id查找用户
+     * @param token
+     * @return
+     */
     @Override
     public Result<UserDO> getById(String token) {
         Long id = JWTUtils.getIdByToken(token);
@@ -92,6 +108,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         return Result.error("没有查到用户信息");
     }
 
+    /**
+     *根据用户名查找用户
+     * @param name
+     * @return
+     */
     @Override
     public UserDO getByUserName(String name) {
         LambdaQueryWrapper<UserDO> queryWrapper = new LambdaQueryWrapper<>();
@@ -104,6 +125,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         return user;
     }
 
+    /**
+     * 上传用户头像
+     * @param token
+     * @param multipartFile
+     * @return
+     * @throws IOException
+     */
     @Override
     public Result<HashMap<String, Object>> saveAvatar(String token, MultipartFile multipartFile) throws IOException {
         if(token.isEmpty()){

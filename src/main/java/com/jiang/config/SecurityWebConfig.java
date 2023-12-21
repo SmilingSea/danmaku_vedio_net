@@ -22,7 +22,6 @@ import org.springframework.web.filter.CorsFilter;
 public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
 
     // TODO :单点登录问题
-    // TODO : SpingSecurity 实现
 
     @Autowired
     private UserDetailsService userDetailsService;

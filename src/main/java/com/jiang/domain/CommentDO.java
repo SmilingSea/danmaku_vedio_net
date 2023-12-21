@@ -6,6 +6,12 @@ import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * CommentDO类用来表示评论
+ *
+ * @author SmilingSea
+ * @date 2023/12/21
+ */
 @Data
 @TableName("tb_comment")
 public class CommentDO {
@@ -26,11 +32,13 @@ public class CommentDO {
      */
     @TableField(value = "video_id")
     private Long videoId;
+
     /**
      * 发表评论的用户的id
      */
     @TableField(value = "user_id")
     private Long userId;
+
     /**
      * 评论的内容
      */
