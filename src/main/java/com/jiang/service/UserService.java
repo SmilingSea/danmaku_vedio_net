@@ -23,9 +23,6 @@ public interface UserService extends IService<UserDO> {
 
     public Result<UserDO> getById(String token);
 
-    //TODO:用户的身份认证，安全框架
-    //TODO:头像功能
-
     public UserDO getByUserName(String name);
 
     public Result<HashMap<String, Object>> saveAvatar(String token, MultipartFile file) throws IOException;

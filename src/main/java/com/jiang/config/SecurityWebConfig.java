@@ -81,7 +81,7 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
         http.cors();*/
 
         http.cors();
-        http.authorizeRequests().anyRequest().authenticated()
+        http.authorizeRequests().antMatchers("/user").permitAll().anyRequest().authenticated()
                 //不通过Session获取SecurityContext
 
                 .and().formLogin()/*.loginProcessingUrl("/user/login2")*/.passwordParameter("password").usernameParameter("name")
