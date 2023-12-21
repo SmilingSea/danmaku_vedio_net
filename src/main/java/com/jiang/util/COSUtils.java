@@ -13,7 +13,6 @@ import com.tencent.cloud.Response;
 import java.io.File;
 import java.util.TreeMap;
 
-// TODO : 飞哥的期待~
 public class COSUtils {
     public static String UploadVideo(File file){
         TreeMap<String, Object> config = new TreeMap<String, Object>();
