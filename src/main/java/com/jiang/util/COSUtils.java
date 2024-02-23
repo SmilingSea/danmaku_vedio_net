@@ -20,6 +20,8 @@ public class COSUtils {
         try {
             //这里的 SecretId 和 SecretKey 代表了用于申请临时密钥的永久身份（主账号、子账号等），子账号需要具有操作存储桶的权限。
             // TODO:id 和 key 需要解耦
+            String secretId = "AKIDhHf3MTO4XntPl5B2g7OQM8jJiz2u0vc7";//用户的 SecretId，建议使用子账号密钥，授权遵循最小权限指引，降低使用风险。子账号密钥获取可参见 https://cloud.tencent.com/document/product/598/37140
+            String secretKey = "NWgfZFgszHWbWFk00lIckaFhutnUyLhv";//用户的 SecretKey，建议使用子账号密钥，授权遵循最小权限指引，降低使用风险。子账号密钥获取可参见 https://cloud.tencent.com/document/product/598/37140
             // 替换为您的云 api 密钥 SecretId
             config.put("secretId", secretId);
             // 替换为您的云 api 密钥 SecretKey
@@ -103,6 +105,8 @@ public class COSUtils {
         try {
             //这里的 SecretId 和 SecretKey 代表了用于申请临时密钥的永久身份（主账号、子账号等），子账号需要具有操作存储桶的权限。
             // TODO:id 和 key 需要解耦
+            String secretId = "AKIDhHf3MTO4XntPl5B2g7OQM8jJiz2u0vc7";//用户的 SecretId，建议使用子账号密钥，授权遵循最小权限指引，降低使用风险。子账号密钥获取可参见 https://cloud.tencent.com/document/product/598/37140
+            String secretKey = "NWgfZFgszHWbWFk00lIckaFhutnUyLhv";//用户的 SecretKey，建议使用子账号密钥，授权遵循最小权限指引，降低使用风险。子账号密钥获取可参见 https://cloud.tencent.com/document/product/598/37140
             // 替换为您的云 api 密钥 SecretId
             config.put("secretId", secretId);
             // 替换为您的云 api 密钥 SecretKey
