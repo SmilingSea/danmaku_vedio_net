@@ -1,0 +1,45 @@
+version: '3'
+services:
+
+  mysql:
+    image: mysql:8.0.23
+    privileged: true
+    container_name: mysql
+    restart: always
+    ports: 
+      - '3307:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=danmaku_video_network
+      - MYSQL_ROOT_HOST=%
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/config/my.cnf:/var/mysql/my.cnf
+        # - ./mysql/datad:/var/run/mysqld
+        # - ./mysql/datal:/var/log/mysql  
+       
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - '6380:6379'
+    command:
+      --requirepass 'jhh72811'
+
+  jhhapp:
+    image: registry.cn-guangzhou.aliyuncs.com/jhhapp/network_danmaku_service:v4.0
+    container_name: danmakuservice
+    restart: always
+    ports:
+      - '8080:8080'
+    environment:
+      - DATABASE_HOST=mysql
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=123456
+      - DATABASE_NAME=danmaku_video_network
+      - DATABASE_PORT=3307
+      - REDIS_HOST=redis
+      - REDIS_PORT=6380
+    depends_on:
+      - mysql
+      - redis
