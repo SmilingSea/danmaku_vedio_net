@@ -9,21 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
 
+/**
+ * @author SmilingSea
+ */
 public interface UserService extends IService<UserDO> {
-    /**
-     * 用户注册
-     *
-     * @param request
-     * @param user
-     * @return
-     */
-    public Result<HashMap<String, Object>> save(HttpServletRequest request, UserDO user);
 
-    public Result<String> login(/*UserDO user*/ String name,String password);
+    Result<HashMap<String, Object>> save(HttpServletRequest request, UserDO user);
 
-    public Result<UserDO> getById(String token);
+    Result<String> login(String name, String password);
 
-    public UserDO getByUserName(String name);
+    Result<UserDO> getById(String token);
 
-    public Result<HashMap<String, Object>> saveAvatar(String token, MultipartFile file) throws IOException;
+    Result<HashMap<String, Object>> saveAvatar(String token, MultipartFile file) throws IOException;
 }

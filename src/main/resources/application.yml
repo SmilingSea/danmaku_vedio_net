@@ -1,12 +1,12 @@
 server:
-  port:  8080
+  port: 8080
 spring:
   servlet:
     multipart:
       max-file-size: 1GB
       max-request-size: 1GB
   application:
-#    应用的名称，可选
+    #    应用的名称，可选
     name: danmaku_vedio_network
   datasource:
     druid:
@@ -17,8 +17,8 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
-    password: jhh72811
     database: 0
+    timeout: 10000
 
 mybatis-plus:
   configuration:

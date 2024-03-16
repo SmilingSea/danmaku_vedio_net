@@ -7,5 +7,5 @@ import com.jiang.domain.CommentDO;
 import java.util.HashMap;
 
 public interface CommentService extends IService<CommentDO> {
-    public Result<HashMap<String,Object>> save(String token,CommentDO comment);
+    Result<HashMap<String,Object>> save(String token,CommentDO comment);
 }

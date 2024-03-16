@@ -1,9 +1,11 @@
 package com.jiang.service;
 
 import com.jiang.common.Result;
-
 import java.util.HashMap;
 
+/**
+ * @author SmlingSea
+ */
 public interface SearchService {
     Result<HashMap<String, Object>> searchVideo(String token,String key);
 

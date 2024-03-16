@@ -17,6 +17,10 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+/**
+ * SpringSecurity的配置类
+ * @author SmilingSea
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
@@ -72,13 +76,6 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        /*http.authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .anyRequest().authenticated()
-                .and().csrf().disable();
-        http.csrf().disable();
-        http.cors();*/
-
         http.cors();
         http.authorizeRequests().antMatchers("/user").permitAll().anyRequest().authenticated()
                 //不通过Session获取SecurityContext
@@ -87,26 +84,11 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(new LoginSuccessHandler())
                 .successForwardUrl("/user/login")
 
-//        and().logout().logoutSuccessHandler(new LogoutSuccessHandler())
                 .and().formLogin()/*.loginProcessingUrl("/user/login2")*/.passwordParameter("password").usernameParameter("name")
                 .failureHandler(new LoginFailureHandler())
                 .failureForwardUrl("/user/login")
                 .and().sessionManagement().maximumSessions(1);
         http.csrf().disable();
-//        http.addFilterAt(userAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class).formLogin().defaultSuccessUrl("/user/login").passwordParameter("password").usernameParameter("name")
-//         .successHandler(new LoginSuccessHandler());
 
     }
-
-
-//    private UsernamePasswordAuthenticationFilter userAuthenticationFilter() throws Exception{
-//        UserAuthenticationFilter userAuthenticationFilter = new UserAuthenticationFilter();
-//        userAuthenticationFilter.setFilterProcessesUrl( "/user/login");
-//        userAuthenticationFilter.setAuthenticationSuccessHandler(new LoginSuccessHandler());
-//        userAuthenticationFilter.setAuthenticationFailureHandler(new LoginFailureHandler());
-//        userAuthenticationFilter.setAuthenticationManager(super.authenticationManager());
-//        return userAuthenticationFilter;
-//    }
-
-
 }

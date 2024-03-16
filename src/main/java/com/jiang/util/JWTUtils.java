@@ -13,32 +13,36 @@ import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;
 
+/**
+ * JWT工具类
+ */
 public class JWTUtils {
-
-
 
     private static final String SECRET = "nihao";
 
     private static final long EXPIRE = 604800;
 
+    /**
+     * 获取token
+     * @param user 用户对象
+     * @return 返回token
+     */
     public static String getToken(UserDO user) {
         Date nowDate = new Date();
         Date expireDate = new Date(nowDate.getTime() + 1000 * EXPIRE);
 
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
-        //生成签名密钥
+        // 生成签名密钥
         byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(SECRET);
 
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
         JwtBuilder builder = Jwts.builder()
-                .claim("isBlocked",user.getBlocked())
-                .claim("uid",user.getId()) // 设置载荷信息
+                // 设置载荷信息
+                .claim("isBlocked", user.getBlocked())
+                .claim("uid", user.getId())
                 .signWith(signatureAlgorithm, signingKey)
                 .setExpiration(expireDate);
-
-
-
 
         //生成JWT
         return builder.compact();
@@ -47,8 +51,8 @@ public class JWTUtils {
     /**
      * 获取token中的参数
      *
-     * @param token
-     * @return
+     * @param token 传入的token值
+     * @return 返回用户id
      */
     public static Long getIdByToken(String token) {
         Long uid = null;
@@ -63,8 +67,4 @@ public class JWTUtils {
         return uid;
     }
 
-
-    /**
-     * 验证token是否合法
-     */
 }
